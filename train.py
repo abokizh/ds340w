@@ -36,7 +36,11 @@ def train_(arg_model):
     path = r"data/V2_train.pkl"
     df = pickle.load(open(path, 'rb')).reset_index()
 
-    print("Data loaded")
+    # Sample 3% of the data
+    sample_size = int(len(df) * 0.03)
+    df = df.sample(sample_size, random_state=random_seed).reset_index(drop=True)
+
+    print("Data sampled to 3% and loaded")
 
     # We use 4-fold for our experiments. For training a single model we will only train for fold 0
     num_folds = 4
